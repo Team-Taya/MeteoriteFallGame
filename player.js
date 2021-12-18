@@ -14,7 +14,7 @@ class Player {
     draw(context) {
         context.beginPath();
         context.rect(this.x, this.y, this.width, this.height)
-        context.filleStyle = "blue";
+        context.fillStyle = "blue";
         context.fill();
         context.closePath();
     }

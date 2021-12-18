@@ -12,7 +12,7 @@ let meteorite = {
     height: 40
 };
 
-let player = new Player(canvasWidth / 2, canvasHeight / 2, 10, 10);
+let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10);
 
 function main() {
     setInterval(meteoriteFall, 50);
@@ -21,7 +21,7 @@ function main() {
 function drawMeteorite() {
     context.beginPath();
     context.rect(meteoriteXPosition, meteoriteYPosition, meteorite.width, meteorite.height)
-    context.filleStyle = "black";
+    context.fillStyle = "black";
     context.fill();
     context.closePath();
 }
