@@ -26,6 +26,7 @@ function drawMeteorite() {
     context.closePath();
 }
 
+// main game loop
 function meteoriteFall() {
     context.clearRect(0,0, canvasWidth, canvasHeight);
     drawMeteorite();
@@ -34,4 +35,13 @@ function meteoriteFall() {
     meteoriteYPosition += meteoriteDisplacement;
 }
 
+// key events
+document.addEventListener('keydown', (e) => {
+    if (e.key == "ArrowLeft")
+        player.x -= 10; 
+    else if (e.key == "ArrowRight")
+        player.x += 10; 
+});
+
+// starting game
 main();
