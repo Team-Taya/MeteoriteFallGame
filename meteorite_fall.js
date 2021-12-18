@@ -12,14 +12,10 @@ let meteorite = {
     height: 40
 };
 
-let player = new Player();
+let player = new Player(canvasWidth / 2, canvasHeight / 2, 10, 10);
 
 function main() {
-    // TODO: In my opinion we shouldn't have functions like drawMeteorite, meteoritefall, See what I did below
-    drawMeteorite();
-    meteoriteFall();
-
-    drawScreen();
+    setInterval(meteoriteFall, 50);
 }
 
 function drawMeteorite() {
@@ -31,15 +27,11 @@ function drawMeteorite() {
 }
 
 function meteoriteFall() {
-    setInterval(() => {
-        meteoriteYPosition += meteoriteDisplacement;
-        context.clearRect(0,0, canvasWidth, canvasHeight);
-        drawMeteorite();
-    }, 50);
-}
+    context.clearRect(0,0, canvasWidth, canvasHeight);
+    drawMeteorite();
+    player.draw(context);
 
-function drawScreen() {
-    
+    meteoriteYPosition += meteoriteDisplacement;
 }
 
 main();

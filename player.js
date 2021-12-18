@@ -10,4 +10,12 @@ class Player {
         this.height = height;
         this.width = width;
     }
+
+    draw(context) {
+        context.beginPath();
+        context.rect(this.x, this.y, this.width, this.height)
+        context.filleStyle = "blue";
+        context.fill();
+        context.closePath();
+    }
 }
