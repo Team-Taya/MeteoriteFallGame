@@ -12,7 +12,7 @@ let meteorite = {
     height: 40
 };
 
-let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10);
+let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
 
 function main() {
     setInterval(meteoriteFall, 50);
@@ -38,9 +38,9 @@ function meteoriteFall() {
 // key events
 document.addEventListener('keydown', (e) => {
     if (e.key == "ArrowLeft")
-        player.x -= 10; 
+        player.moveLeft();
     else if (e.key == "ArrowRight")
-        player.x += 10; 
+        player.moveRight();
 });
 
 // starting game
