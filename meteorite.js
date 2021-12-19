@@ -5,6 +5,7 @@ class Meteorite {
     width;
     color;
     displacement;
+    isFalling;
 
     constructor(x, y, height, width, color, speed) {
         this.x = x;
@@ -13,6 +14,7 @@ class Meteorite {
         this.width = width;
         this.color = color;
         this.speed = speed;
+        this.isFalling = false;
     }
 
     drawMeteorite(context) {

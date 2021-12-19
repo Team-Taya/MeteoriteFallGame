@@ -6,40 +6,42 @@ const meteoriteFallSpeed = 5;
 const meteoriteWidth = 10;
 const meteoriteHeight = 40;
 
-let meteorites = new Array();
-
-// let meteoriteXPosition = Math.floor(Math.random() * canvasWidth); 
 let meteoriteYPosition = 0;
+
+let meteorites = new Array();
 let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
-// let meteorite = new Meteorite(meteoriteXPosition, meteoriteYPosition, meteoriteHeight, meteoriteWidth, "black", meteoriteFallSpeed);
 
 function main() {
     fillMeteorites();
-    setInterval(meteoriteFall, 50);
+    setInterval(startGame, 50);
 }
 
-
-// main game loop
-function meteoriteFall() {
+// main game functionality
+function startGame() {
     var randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
     context.clearRect(0,0, canvasWidth, canvasHeight);
-    // meteorite.drawMeteorite(context);
-    // meteorite.makeMeteoriteFall();
-    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
-        meteorites[arrayIndex].drawMeteorite(context);
-        meteorites[arrayIndex].makeMeteoriteFall();
+
+    if (meteorites[randomMeteoriteIndex].isFalling == false) {
+        meteorites[randomMeteoriteIndex].drawMeteorite(context);
+        meteorites[randomMeteoriteIndex].makeMeteoriteFall();
+        meteorites[randomMeteoriteIndex].isFalling = true;
     }
+
+    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
+        if (meteorites[arrayIndex].isFalling == true) {
+            meteorites[arrayIndex].drawMeteorite(context);
+            meteorites[arrayIndex].makeMeteoriteFall();
+            if (meteorites[arrayIndex].y >= canvas.height) {
+                meteorites[arrayIndex].y = 0;
+            }
+        }
+    }
+    
     player.drawPlayer(context);
 }
 
-// function destroyMeteorite() {
-//     if (meteorite.y == canvasHeight) {
-//         meteorite = null;
-//     }
-// }
-
-
+// fill meteorites array with all possible meteorites in the canvas width
 function fillMeteorites() {
     var numberOfMeteorites = parseInt(canvasWidth / meteoriteWidth);
 
