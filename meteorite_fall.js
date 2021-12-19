@@ -13,11 +13,11 @@ let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
 
 function main() {
     initializeMeteorites();
-    setInterval(startGame, 50);
+    setInterval(loopGame, 50);
 }
 
 // main game functionality
-function startGame() {
+function loopGame() {
     let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
     context.clearRect(0,0, canvasWidth, canvasHeight);
