@@ -1,21 +1,21 @@
-class Player {
+class Meteorite {
     x;
     y;
     height;
     width;
-    speed;
     color;
+    displacement;
 
-    constructor(x, y, height, width, speed, color) {
+    constructor(x, y, height, width, color, speed) {
         this.x = x;
         this.y = y;
         this.height = height;
         this.width = width;
-        this.speed = speed;
         this.color = color;
+        this.speed = speed;
     }
 
-    drawPlayer(context) {
+    drawMeteorite(context) {
         context.beginPath();
         context.rect(this.x, this.y, this.width, this.height)
         context.fillStyle = this.color;
@@ -23,11 +23,7 @@ class Player {
         context.closePath();
     }
 
-    moveLeft() {
-        this.x -= this.speed;
-    }
-
-    moveRight() {
-        this.x += this.speed;
+    makeMeteoriteFall() {
+        this.y += this.speed;
     }
 }
