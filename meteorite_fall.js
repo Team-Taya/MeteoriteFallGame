@@ -23,8 +23,6 @@ function startGame() {
     context.clearRect(0,0, canvasWidth, canvasHeight);
 
     if (meteorites[randomMeteoriteIndex].isFalling == false) {
-        meteorites[randomMeteoriteIndex].draw(context);
-        meteorites[randomMeteoriteIndex].makeFall();
         meteorites[randomMeteoriteIndex].isFalling = true;
     }
 
