@@ -42,7 +42,7 @@ function loopGame() {
 
 // fill meteorites array with all possible meteorites in the canvas width
 function initializeMeteorites() {
-    var numberOfMeteorites = parseInt(canvasWidth / meteoriteWidth);
+    let numberOfMeteorites = parseInt(canvasWidth / meteoriteWidth);
 
     for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += meteoriteWidth) {
         meteorites[arrayIndex] = new Meteorite(xPositionValue, meteoriteYPosition, meteoriteHeight, meteoriteWidth, "black", meteoriteFallSpeed);
