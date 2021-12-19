@@ -2,37 +2,51 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 const canvasHeight = canvas.height;
 const canvasWidth = canvas.width;
-const meteoriteDisplacement = 5;
+const meteoriteFallSpeed = 5;
+const meteoriteWidth = 10;
+const meteoriteHeight = 40;
 
-let meteoriteXPosition = Math.floor(Math.random() * canvasWidth); 
 let meteoriteYPosition = 0;
 
-let meteorite = {
-    width: 10,
-    height: 40
-};
-
+let meteorites = new Array();
 let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
 
 function main() {
-    setInterval(meteoriteFall, 50);
+    initializeMeteorites();
+    setInterval(loopGame, 50);
 }
 
-function drawMeteorite() {
-    context.beginPath();
-    context.rect(meteoriteXPosition, meteoriteYPosition, meteorite.width, meteorite.height)
-    context.fillStyle = "black";
-    context.fill();
-    context.closePath();
-}
+// main game functionality
+function loopGame() {
+    let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
-// main game loop
-function meteoriteFall() {
     context.clearRect(0,0, canvasWidth, canvasHeight);
-    drawMeteorite();
-    player.draw(context);
 
-    meteoriteYPosition += meteoriteDisplacement;
+    if (meteorites[randomMeteoriteIndex].isFalling == false) {
+        meteorites[randomMeteoriteIndex].isFalling = true;
+    }
+
+    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
+        if (meteorites[arrayIndex].isFalling == true) {
+            meteorites[arrayIndex].draw(context);
+            meteorites[arrayIndex].makeFall();
+            if (meteorites[arrayIndex].y >= canvas.height) {
+                meteorites[arrayIndex].y = 0;
+                meteorites[arrayIndex].isFalling = false;
+            }
+        }
+    }
+    
+    player.draw(context);
+}
+
+// fill meteorites array with all possible meteorites in the canvas width
+function initializeMeteorites() {
+    let numberOfMeteorites = parseInt(canvasWidth / meteoriteWidth);
+
+    for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += meteoriteWidth) {
+        meteorites[arrayIndex] = new Meteorite(xPositionValue, meteoriteYPosition, meteoriteHeight, meteoriteWidth, "black", meteoriteFallSpeed);
+    }
 }
 
 // key events
