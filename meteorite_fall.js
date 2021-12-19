@@ -23,14 +23,14 @@ function startGame() {
     context.clearRect(0,0, canvasWidth, canvasHeight);
 
     if (meteorites[randomMeteoriteIndex].isFalling == false) {
-        meteorites[randomMeteoriteIndex].drawMeteorite(context);
+        meteorites[randomMeteoriteIndex].draw(context);
         meteorites[randomMeteoriteIndex].makeMeteoriteFall();
         meteorites[randomMeteoriteIndex].isFalling = true;
     }
 
     for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
         if (meteorites[arrayIndex].isFalling == true) {
-            meteorites[arrayIndex].drawMeteorite(context);
+            meteorites[arrayIndex].draw(context);
             meteorites[arrayIndex].makeMeteoriteFall();
             if (meteorites[arrayIndex].y >= canvas.height) {
                 meteorites[arrayIndex].y = 0;
@@ -38,7 +38,7 @@ function startGame() {
         }
     }
     
-    player.drawPlayer(context);
+    player.draw(context);
 }
 
 // fill meteorites array with all possible meteorites in the canvas width

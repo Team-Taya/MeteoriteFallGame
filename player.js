@@ -15,7 +15,7 @@ class Player {
         this.color = color;
     }
 
-    drawPlayer(context) {
+    draw(context) {
         context.beginPath();
         context.rect(this.x, this.y, this.width, this.height)
         context.fillStyle = this.color;
