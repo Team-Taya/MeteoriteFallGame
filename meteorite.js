@@ -4,7 +4,7 @@ class Meteorite {
     height;
     width;
     color;
-    displacement;
+    speed;
     isFalling;
 
     constructor(x, y, height, width, color, speed) {
