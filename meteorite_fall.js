@@ -12,7 +12,7 @@ let meteorites = new Array();
 let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
 
 function main() {
-    fillMeteorites();
+    initializeMeteorites();
     setInterval(startGame, 50);
 }
 
