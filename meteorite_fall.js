@@ -18,7 +18,7 @@ function main() {
 
 // main game functionality
 function startGame() {
-    var randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
+    let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
     context.clearRect(0,0, canvasWidth, canvasHeight);
 
