@@ -25,7 +25,7 @@ class Meteorite {
         context.closePath();
     }
 
-    makeMeteoriteFall() {
+    makeFall() {
         this.y += this.speed;
     }
 }

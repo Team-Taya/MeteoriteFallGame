@@ -24,16 +24,17 @@ function startGame() {
 
     if (meteorites[randomMeteoriteIndex].isFalling == false) {
         meteorites[randomMeteoriteIndex].draw(context);
-        meteorites[randomMeteoriteIndex].makeMeteoriteFall();
+        meteorites[randomMeteoriteIndex].makeFall();
         meteorites[randomMeteoriteIndex].isFalling = true;
     }
 
     for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
         if (meteorites[arrayIndex].isFalling == true) {
             meteorites[arrayIndex].draw(context);
-            meteorites[arrayIndex].makeMeteoriteFall();
+            meteorites[arrayIndex].makeFall();
             if (meteorites[arrayIndex].y >= canvas.height) {
                 meteorites[arrayIndex].y = 0;
+                meteorites[arrayIndex].isFalling = false;
             }
         }
     }
