@@ -24,7 +24,7 @@ function loopGame() {
 
     context.clearRect(0,0, canvasWidth, canvasHeight);
 
-    if (meteorites[randomMeteoriteIndex].isFalling == false) {
+    if (!paused && meteorites[randomMeteoriteIndex].isFalling == false) {
         meteorites[randomMeteoriteIndex].isFalling = true;
     }
 
@@ -55,12 +55,16 @@ function initializeMeteorites() {
 
 // key events
 document.addEventListener('keydown', (e) => {
+    if (e.key == "p")
+        paused = !paused;
+
+    if (paused)
+        return;
+
     if (e.key == "ArrowLeft")
         player.moveLeft();
     else if (e.key == "ArrowRight")
         player.moveRight();
-    else if (e.key == "p")
-        paused = !paused;
 });
 
 // starting game
