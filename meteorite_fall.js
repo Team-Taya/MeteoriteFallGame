@@ -42,6 +42,13 @@ function loopGame() {
     }
     
     player.draw(context);
+
+    if (paused) {
+        context.fillStyle = "red";
+        context.font = "bold 36px sans-serif";
+        context.textAlign = "center"
+        context.fillText("Paused", canvasWidth / 2, canvasHeight / 2);
+    }
 }
 
 // fill meteorites array with all possible meteorites in the canvas width
