@@ -1,15 +1,18 @@
+// CANVAS CONSTANTS
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
-const canvasHeight = canvas.height;
-const canvasWidth = canvas.width;
-const meteoriteFallSpeed = 5;
-const meteoriteWidth = 10;
-const meteoriteHeight = 40;
+const CANVAS_HEIGHT = canvas.height;
+const CANVAS_WIDTH = canvas.width;
+// PLAYER CONSTANTS
 
-let meteoriteYPosition = 0;
+// METEORITE CONSTANTS
+const METEORITE_FALL_SPEED = 5;
+const METEORITE_WIDTH = 10;
+const METEORITE_HEIGHT = 40;
+const METEORITE_SPAWN_Y = 0;
 
 let meteorites = new Array();
-let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
+let player = new Player(CANVAS_WIDTH / 2, CANVAS_HEIGHT - 10, 10, 10, 10, "blue");
 
 function main() {
     initializeMeteorites();
@@ -20,7 +23,7 @@ function main() {
 function loopGame() {
     let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
-    context.clearRect(0,0, canvasWidth, canvasHeight);
+    context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     if (meteorites[randomMeteoriteIndex].isFalling == false) {
         meteorites[randomMeteoriteIndex].isFalling = true;
@@ -42,10 +45,10 @@ function loopGame() {
 
 // fill meteorites array with all possible meteorites in the canvas width
 function initializeMeteorites() {
-    let numberOfMeteorites = parseInt(canvasWidth / meteoriteWidth);
+    let numberOfMeteorites = parseInt(CANVAS_WIDTH / METEORITE_WIDTH);
 
-    for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += meteoriteWidth) {
-        meteorites[arrayIndex] = new Meteorite(xPositionValue, meteoriteYPosition, meteoriteHeight, meteoriteWidth, "black", meteoriteFallSpeed);
+    for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += METEORITE_WIDTH) {
+        meteorites[arrayIndex] = new Meteorite(xPositionValue, METEORITE_SPAWN_Y, METEORITE_HEIGHT, METEORITE_WIDTH, "black", METEORITE_FALL_SPEED);
     }
 }
 
