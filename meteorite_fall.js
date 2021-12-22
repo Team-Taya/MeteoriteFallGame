@@ -52,9 +52,9 @@ function initializeMeteorites() {
 // key events
 document.addEventListener('keydown', (e) => {
     if (e.key == "ArrowLeft")
-        player.moveLeft();
+        player.moveLeft(canvasWidth);
     else if (e.key == "ArrowRight")
-        player.moveRight();
+        player.moveRight(canvasWidth);
 });
 
 // starting game

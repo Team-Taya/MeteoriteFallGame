@@ -23,11 +23,17 @@ class Player {
         context.closePath();
     }
 
-    moveLeft() {
+    moveLeft(canvasWidth) {
         this.x -= this.speed;
+    
+        if (this.x < 0)
+            this.x += canvasWidth;
     }
 
-    moveRight() {
+    moveRight(canvasWidth) {
         this.x += this.speed;
+
+        if (this.x >= canvasWidth)
+            this.x -= canvasWidth;
     }
 }
