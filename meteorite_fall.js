@@ -11,6 +11,8 @@ let meteoriteYPosition = 0;
 let meteorites = new Array();
 let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
 
+let paused = false;
+
 function main() {
     initializeMeteorites();
     setInterval(loopGame, 50);
@@ -29,7 +31,9 @@ function loopGame() {
     for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
         if (meteorites[arrayIndex].isFalling == true) {
             meteorites[arrayIndex].draw(context);
-            meteorites[arrayIndex].makeFall();
+            if (!paused) {
+                meteorites[arrayIndex].makeFall();
+            }
             if (meteorites[arrayIndex].y >= canvas.height) {
                 meteorites[arrayIndex].y = 0;
                 meteorites[arrayIndex].isFalling = false;
@@ -55,6 +59,8 @@ document.addEventListener('keydown', (e) => {
         player.moveLeft();
     else if (e.key == "ArrowRight")
         player.moveRight();
+    else if (e.key == "p")
+        paused = !paused;
 });
 
 // starting game
