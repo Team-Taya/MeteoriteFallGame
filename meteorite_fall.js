@@ -4,7 +4,12 @@ const context = canvas.getContext("2d");
 const CANVAS_HEIGHT = canvas.height;
 const CANVAS_WIDTH = canvas.width;
 // PLAYER CONSTANTS
-
+const PLAYER_WIDTH = 10;
+const PLAYER_HEIGHT = 10;
+const PLAYER_SPEED = 10;
+const PLAYER_COLOR = "blue"
+const PLAYER_SPAWN_X = CANVAS_WIDTH / 2;
+const PLAYER_SPAWN_Y = CANVAS_HEIGHT - PLAYER_WIDTH;
 // METEORITE CONSTANTS
 const METEORITE_FALL_SPEED = 5;
 const METEORITE_WIDTH = 10;
@@ -12,7 +17,7 @@ const METEORITE_HEIGHT = 40;
 const METEORITE_SPAWN_Y = 0;
 
 let meteorites = new Array();
-let player = new Player(CANVAS_WIDTH / 2, CANVAS_HEIGHT - 10, 10, 10, 10, "blue");
+let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
 
 function main() {
     initializeMeteorites();
