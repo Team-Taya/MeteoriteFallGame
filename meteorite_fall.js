@@ -7,7 +7,7 @@ const CANVAS_WIDTH = canvas.width;
 const PLAYER_WIDTH = 10;
 const PLAYER_HEIGHT = 10;
 const PLAYER_SPEED = 10;
-const PLAYER_COLOR = "blue"
+const PLAYER_COLOR = "magenta"
 const PLAYER_SPAWN_X = CANVAS_WIDTH / 2;
 const PLAYER_SPAWN_Y = CANVAS_HEIGHT - PLAYER_WIDTH;
 // METEORITE CONSTANTS
