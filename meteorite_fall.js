@@ -10,6 +10,7 @@ let meteoriteYPosition = 0;
 
 let meteorites = new Array();
 let player = new Player(canvasWidth / 2, canvasHeight - 10, 10, 10, 10, "blue");
+let isGameOver = false;
 
 function main() {
     initializeMeteorites();
@@ -19,7 +20,7 @@ function main() {
 // main game functionality
 function loopGame() {
     let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
-
+    isGameOver = false;
     context.clearRect(0,0, canvasWidth, canvasHeight);
 
     if (meteorites[randomMeteoriteIndex].isFalling == false) {
@@ -27,6 +28,10 @@ function loopGame() {
     }
 
     for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
+        checkGameOver(meteorites[arrayIndex].x, meteorites[arrayIndex].y, player.x, player.y, meteorites[arrayIndex].width, meteorites[arrayIndex].height, player.width);
+        if (isGameOver == true) {
+            break;
+        }
         if (meteorites[arrayIndex].isFalling == true) {
             meteorites[arrayIndex].draw(context);
             meteorites[arrayIndex].makeFall();
@@ -36,7 +41,7 @@ function loopGame() {
             }
         }
     }
-    
+   
     player.draw(context);
 }
 
@@ -48,6 +53,25 @@ function initializeMeteorites() {
         meteorites[arrayIndex] = new Meteorite(xPositionValue, meteoriteYPosition, meteoriteHeight, meteoriteWidth, "black", meteoriteFallSpeed);
     }
 }
+
+function checkGameOver(meteoriteX, meteoriteY, playerX, playerY, meteoriteWidth, meteoriteHeight, playerWidth) {
+    if (meteoriteY + meteoriteHeight == playerY) {
+        if (meteoriteX <= playerX + playerWidth && meteoriteX + meteoriteWidth >= playerX) {
+            isGameOver = true;
+            context.clearRect(0,0, canvasWidth, canvasHeight);
+            resetMeteorites();
+            alert("Game Over!");
+        }
+    }
+}
+
+function resetMeteorites() {
+    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
+        meteorites[arrayIndex].isFalling = false;
+        meteorites[arrayIndex].y = 0;
+    }
+}
+
 
 // key events
 document.addEventListener('keydown', (e) => {
