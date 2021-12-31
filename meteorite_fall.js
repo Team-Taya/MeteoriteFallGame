@@ -29,20 +29,20 @@ function main() {
 
 // main game functionality
 function loopGame() {
+    if (paused)
+        return;
+
     let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
     context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    if (!paused && meteorites[randomMeteoriteIndex].isFalling == false) {
+    if (meteorites[randomMeteoriteIndex].isFalling == false)
         meteorites[randomMeteoriteIndex].isFalling = true;
-    }
 
     for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
         if (meteorites[arrayIndex].isFalling == true) {
             meteorites[arrayIndex].draw(context);
-            if (!paused) {
-                meteorites[arrayIndex].makeFall();
-            }
+            meteorites[arrayIndex].makeFall();
             if (meteorites[arrayIndex].y >= canvas.height) {
                 meteorites[arrayIndex].y = 0;
                 meteorites[arrayIndex].isFalling = false;
@@ -73,9 +73,6 @@ function initializeMeteorites() {
 document.addEventListener('keydown', (e) => {
     if (e.key == "p")
         paused = !paused;
-
-    if (paused)
-        return;
 
     if (e.key == "ArrowLeft")
         player.moveLeft(CANVAS_WIDTH);
