@@ -51,13 +51,6 @@ function loopGame() {
     }
     
     player.draw(context);
-
-    if (paused) {
-        context.fillStyle = "red";
-        context.font = "bold 36px sans-serif";
-        context.textAlign = "center"
-        context.fillText("Paused", canvasWidth / 2, canvasHeight / 2);
-    }
 }
 
 // fill meteorites array with all possible meteorites in the canvas width
@@ -71,8 +64,15 @@ function initializeMeteorites() {
 
 // key events
 document.addEventListener('keydown', (e) => {
-    if (e.key == " ")
+    if (e.key == " ") {
         paused = !paused;
+        if (paused) {
+            context.fillStyle = "red";
+            context.font = "bold 36px sans-serif";
+            context.textAlign = "center";
+            context.fillText("Paused", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        }
+    }
 
     if (e.key == "ArrowLeft")
         player.moveLeft(CANVAS_WIDTH);
