@@ -71,7 +71,7 @@ function initializeMeteorites() {
 
 // key events
 document.addEventListener('keydown', (e) => {
-    if (e.key == "p")
+    if (e.key == " ")
         paused = !paused;
 
     if (e.key == "ArrowLeft")
