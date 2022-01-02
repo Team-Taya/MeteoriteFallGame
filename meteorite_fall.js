@@ -27,17 +27,17 @@ function loopGame() {
         meteorites[randomMeteoriteIndex].isFalling = true;
     }
 
-    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
-        checkGameOver(meteorites[arrayIndex].x, meteorites[arrayIndex].y, player.x, player.y, meteorites[arrayIndex].width, meteorites[arrayIndex].height, player.width);
+    for (i = 0; i < meteorites.length; i++) {
+        checkGameOver(meteorites[i].x, meteorites[i].y, player.x, player.y, meteorites[i].width, meteorites[i].height, player.width);
         if (isGameOver == true) {
             break;
         }
-        if (meteorites[arrayIndex].isFalling == true) {
-            meteorites[arrayIndex].draw(context);
-            meteorites[arrayIndex].makeFall();
-            if (meteorites[arrayIndex].y >= canvas.height) {
-                meteorites[arrayIndex].y = 0;
-                meteorites[arrayIndex].isFalling = false;
+        if (meteorites[i].isFalling == true) {
+            meteorites[i].draw(context);
+            meteorites[i].makeFall();
+            if (meteorites[i].y >= canvas.height) {
+                meteorites[i].y = 0;
+                meteorites[i].isFalling = false;
             }
         }
     }
@@ -66,12 +66,11 @@ function checkGameOver(meteoriteX, meteoriteY, playerX, playerY, meteoriteWidth,
 }
 
 function resetMeteorites() {
-    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
-        meteorites[arrayIndex].isFalling = false;
-        meteorites[arrayIndex].y = 0;
+    for (i = 0; i < meteorites.length; i++) {
+        meteorites[i].isFalling = false;
+        meteorites[i].y = 0;
     }
 }
-
 
 // key events
 document.addEventListener('keydown', (e) => {
