@@ -28,8 +28,11 @@ function loopGame() {
     }
 
     for (i = 0; i < meteorites.length; i++) {
-        checkGameOver(meteorites[i].x, meteorites[i].y, player.x, player.y, meteorites[i].width, meteorites[i].height, player.width);
-        if (isGameOver == true) {
+        if (checkCollision(meteorites[i], player)) {
+            isGameOver = true;
+            context.clearRect(0,0, canvasWidth, canvasHeight);
+            resetMeteorites();
+            alert("Game Over!");
             break;
         }
         if (meteorites[i].isFalling == true) {
@@ -54,15 +57,11 @@ function initializeMeteorites() {
     }
 }
 
-function checkGameOver(meteoriteX, meteoriteY, playerX, playerY, meteoriteWidth, meteoriteHeight, playerWidth) {
-    if (meteoriteY + meteoriteHeight == playerY) {
-        if (meteoriteX <= playerX + playerWidth && meteoriteX + meteoriteWidth >= playerX) {
-            isGameOver = true;
-            context.clearRect(0,0, canvasWidth, canvasHeight);
-            resetMeteorites();
-            alert("Game Over!");
-        }
+function checkCollision(meteorite, player) {
+    if (meteorite.y + meteorite.height == player.y && meteorite.x <= player.x + player.width && meteorite.x + meteorite.width >= player.x) {
+        return true;
     }
+    return false;
 }
 
 function resetMeteorites() {
