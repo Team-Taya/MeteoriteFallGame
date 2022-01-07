@@ -18,8 +18,9 @@ const METEORITE_HEIGHT = 40;
 const METEORITE_SPAWN_Y = 0;
 
 let meteorites = new Array();
-let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
 
+let isGameOver = false;
+let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
 let paused = false;
 
 function main() {
@@ -33,23 +34,31 @@ function loopGame() {
         return;
 
     let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
-
+    isGameOver = false;
     context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    if (meteorites[randomMeteoriteIndex].isFalling == false)
+    if (meteorites[randomMeteoriteIndex].isFalling == false) {
         meteorites[randomMeteoriteIndex].isFalling = true;
+    }
 
-    for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
-        if (meteorites[arrayIndex].isFalling == true) {
-            meteorites[arrayIndex].draw(context);
-            meteorites[arrayIndex].makeFall();
-            if (meteorites[arrayIndex].y >= canvas.height) {
-                meteorites[arrayIndex].y = 0;
-                meteorites[arrayIndex].isFalling = false;
+    for (i = 0; i < meteorites.length; i++) {
+        if (checkCollision(meteorites[i], player)) {
+            isGameOver = true;
+            context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            resetMeteorites();
+            alert("Game Over!");
+            break;
+        }
+        if (meteorites[i].isFalling == true) {
+            meteorites[i].draw(context);
+            meteorites[i].makeFall();
+            if (meteorites[i].y >= canvas.height) {
+                meteorites[i].y = 0;
+                meteorites[i].isFalling = false;
             }
         }
     }
-    
+   
     player.draw(context);
 }
 
@@ -59,6 +68,20 @@ function initializeMeteorites() {
 
     for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += METEORITE_WIDTH) {
         meteorites[arrayIndex] = new Meteorite(xPositionValue, METEORITE_SPAWN_Y, METEORITE_HEIGHT, METEORITE_WIDTH, METEORITE_COLOR, METEORITE_FALL_SPEED);
+    }
+}
+
+function checkCollision(meteorite, player) {
+    if (meteorite.y + meteorite.height == player.y && meteorite.x <= player.x + player.width && meteorite.x + meteorite.width >= player.x) {
+        return true;
+    }
+    return false;
+}
+
+function resetMeteorites() {
+    for (i = 0; i < meteorites.length; i++) {
+        meteorites[i].isFalling = false;
+        meteorites[i].y = 0;
     }
 }
 
