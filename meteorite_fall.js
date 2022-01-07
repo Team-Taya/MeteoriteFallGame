@@ -21,12 +21,12 @@ const PAUSE_TEXT_COLOR = "rgb(0, 0, 255)"
 const PAUSE_TEXT_FONT = "bold 36px sans-serif";
 const PAUSE_TEXT_ALIGN = "center";
 const PAUSE_TEXT = "Paused";
-
+// GAME VARIABLES
 let meteorites = new Array();
-
 let isGameOver = false;
 let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
 let paused = false;
+let score = 0;
 
 function main() {
     initializeMeteorites();
@@ -48,11 +48,16 @@ function loopGame() {
 
     for (i = 0; i < meteorites.length; i++) {
         if (checkCollision(meteorites[i], player)) {
-            isGameOver = true;
-            context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            resetMeteorites();
-            alert("Game Over!");
-            break;
+            if (meteorites[i].color == METEORITE_COLOR_POINT) {
+                score++;
+                console.log(score);
+            } else {
+                isGameOver = true;
+                context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                resetMeteorites();
+                alert("Game Over!");
+                break;
+            }
         }
         if (meteorites[i].isFalling == true) {
             meteorites[i].draw(context);
