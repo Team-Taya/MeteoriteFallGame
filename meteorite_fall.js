@@ -8,7 +8,8 @@ const PLAYER_WIDTH = 10;
 const PLAYER_HEIGHT = 10;
 const PLAYER_SPEED = 10;
 const PLAYER_COLOR = "rgb(89, 179, 0)";
-const METEORITE_COLOR = "rgb(0, 0, 0)";
+const METEORITE_COLOR_NORMAL = "rgb(0, 0, 0)";
+const METEORITE_COLOR_POINT = "rgb(255, 0, 0)";
 const PLAYER_SPAWN_X = CANVAS_WIDTH / 2;
 const PLAYER_SPAWN_Y = CANVAS_HEIGHT - PLAYER_WIDTH;
 // METEORITE CONSTANTS
@@ -16,12 +17,12 @@ const METEORITE_FALL_SPEED = 5;
 const METEORITE_WIDTH = 10;
 const METEORITE_HEIGHT = 40;
 const METEORITE_SPAWN_Y = 0;
-
+// GAME VARIABLES
 let meteorites = new Array();
-
 let isGameOver = false;
 let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
 let paused = false;
+let score = 0;
 
 function main() {
     initializeMeteorites();
@@ -43,11 +44,15 @@ function loopGame() {
 
     for (i = 0; i < meteorites.length; i++) {
         if (checkCollision(meteorites[i], player)) {
-            isGameOver = true;
-            context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            resetMeteorites();
-            alert("Game Over!");
-            break;
+            if (meteorites[i].color == METEORITE_COLOR_POINT) {
+                score++;
+            } else {
+                isGameOver = true;
+                context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                resetMeteorites();
+                alert("Game Over!");
+                break;
+            }
         }
         if (meteorites[i].isFalling == true) {
             meteorites[i].draw(context);
@@ -60,6 +65,12 @@ function loopGame() {
     }
    
     player.draw(context);
+    
+    context.fillStyle = "black";
+    context.font = "12px sans-serif";
+    context.textAlign = "start";
+    context.textBaseline = "top";
+    context.fillText("score: " + score, 10, 10);
 }
 
 // fill meteorites array with all possible meteorites in the canvas width
@@ -67,7 +78,8 @@ function initializeMeteorites() {
     let numberOfMeteorites = parseInt(CANVAS_WIDTH / METEORITE_WIDTH);
 
     for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += METEORITE_WIDTH) {
-        meteorites[arrayIndex] = new Meteorite(xPositionValue, METEORITE_SPAWN_Y, METEORITE_HEIGHT, METEORITE_WIDTH, METEORITE_COLOR, METEORITE_FALL_SPEED);
+        meteoriteColor = Math.random() > 0.5 ? METEORITE_COLOR_POINT : METEORITE_COLOR_NORMAL;
+        meteorites[arrayIndex] = new Meteorite(xPositionValue, METEORITE_SPAWN_Y, METEORITE_HEIGHT, METEORITE_WIDTH, meteoriteColor, METEORITE_FALL_SPEED);
     }
 }
 
@@ -90,9 +102,10 @@ document.addEventListener('keydown', (e) => {
     if (e.key == " ") {
         paused = !paused;
         if (paused) {
-            context.fillStyle = "red";
+            context.fillStyle = "rgb(0, 0, 255)";
             context.font = "bold 36px sans-serif";
             context.textAlign = "center";
+            context.textBaseline = "alphabetic";
             context.fillText("Paused", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
         }
     }
