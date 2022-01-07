@@ -7,8 +7,6 @@ class Meteorite {
     speed;
     isFalling;
 
-    static defaultSpeed = 5;
-
     constructor(x, y, height, width, color, speed) {
         this.x = x;
         this.y = y;
