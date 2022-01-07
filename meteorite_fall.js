@@ -5,7 +5,8 @@ const CANVAS_HEIGHT = canvas.height;
 const CANVAS_WIDTH = canvas.width;
 // PLAYER CONSTANTS
 const PLAYER_WIDTH = 10;
-const PLAYER_HEIGHT = 10; const PLAYER_SPEED = 10;
+const PLAYER_HEIGHT = 10;
+const PLAYER_SPEED = 10;
 const PLAYER_COLOR = "rgb(89, 179, 0)";
 const METEORITE_COLOR_NORMAL = "rgb(0, 0, 0)";
 const METEORITE_COLOR_POINT = "rgb(255, 0, 0)";
@@ -45,7 +46,6 @@ function loopGame() {
         if (checkCollision(meteorites[i], player)) {
             if (meteorites[i].color == METEORITE_COLOR_POINT) {
                 score++;
-                console.log(score);
             } else {
                 isGameOver = true;
                 context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -78,7 +78,7 @@ function initializeMeteorites() {
     let numberOfMeteorites = parseInt(CANVAS_WIDTH / METEORITE_WIDTH);
 
     for (arrayIndex = 0, xPositionValue = 0; arrayIndex < numberOfMeteorites; arrayIndex++, xPositionValue += METEORITE_WIDTH) {
-        meteoriteColor = Math.random() > 0.5? METEORITE_COLOR_POINT : METEORITE_COLOR_NORMAL;
+        meteoriteColor = Math.random() > 0.5 ? METEORITE_COLOR_POINT : METEORITE_COLOR_NORMAL;
         meteorites[arrayIndex] = new Meteorite(xPositionValue, METEORITE_SPAWN_Y, METEORITE_HEIGHT, METEORITE_WIDTH, meteoriteColor, METEORITE_FALL_SPEED);
     }
 }
