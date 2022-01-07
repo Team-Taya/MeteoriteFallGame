@@ -16,6 +16,11 @@ const METEORITE_FALL_SPEED = 5;
 const METEORITE_WIDTH = 10;
 const METEORITE_HEIGHT = 40;
 const METEORITE_SPAWN_Y = 0;
+// PAUSE MENU CONSTANTS
+const PAUSE_TEXT_COLOR = "rgb(0, 0, 255)"
+const PAUSE_TEXT_FONT = "bold 36px sans-serif";
+const PAUSE_TEXT_ALIGN = "center";
+const PAUSE_TEXT = "Paused";
 
 let meteorites = new Array();
 let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
@@ -68,10 +73,10 @@ document.addEventListener('keydown', (e) => {
     if (e.key == " ") {
         paused = !paused;
         if (paused) {
-            context.fillStyle = "red";
-            context.font = "bold 36px sans-serif";
-            context.textAlign = "center";
-            context.fillText("Paused", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+            context.fillStyle = PAUSE_TEXT_COLOR;
+            context.font = PAUSE_TEXT_FONT;
+            context.textAlign = PAUSE_TEXT_ALIGN;
+            context.fillText(PAUSE_TEXT, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
         }
     }
 
