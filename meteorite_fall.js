@@ -16,11 +16,6 @@ const METEORITE_FALL_SPEED = 5;
 const METEORITE_WIDTH = 10;
 const METEORITE_HEIGHT = 40;
 const METEORITE_SPAWN_Y = 0;
-// PAUSE MENU CONSTANTS
-const PAUSE_TEXT_COLOR = "rgb(0, 0, 255)"
-const PAUSE_TEXT_FONT = "bold 36px sans-serif";
-const PAUSE_TEXT_ALIGN = "center";
-const PAUSE_TEXT = "Paused";
 // GAME VARIABLES
 let meteorites = new Array();
 let isGameOver = false;
@@ -70,6 +65,12 @@ function loopGame() {
     }
    
     player.draw(context);
+    
+    context.fillStyle = "black";
+    context.font = "12px sans-serif";
+    context.textAlign = "start";
+    context.textBaseline = "top";
+    context.fillText("score: " + score, 10, 10);
 }
 
 // fill meteorites array with all possible meteorites in the canvas width
@@ -101,10 +102,11 @@ document.addEventListener('keydown', (e) => {
     if (e.key == " ") {
         paused = !paused;
         if (paused) {
-            context.fillStyle = PAUSE_TEXT_COLOR;
-            context.font = PAUSE_TEXT_FONT;
-            context.textAlign = PAUSE_TEXT_ALIGN;
-            context.fillText(PAUSE_TEXT, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+            context.fillStyle = "rgb(0, 0, 255)";
+            context.font = "bold 36px sans-serif";
+            context.textAlign = "center";
+            context.textBaseline = "alphabetic";
+            context.fillText("Paused", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
         }
     }
 
