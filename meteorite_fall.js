@@ -20,6 +20,8 @@ const METEORITE_SPAWN_Y = 0;
 let meteorites = new Array();
 let player = new Player(PLAYER_SPAWN_X, PLAYER_SPAWN_Y, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_SPEED, PLAYER_COLOR);
 
+let paused = false;
+
 function main() {
     initializeMeteorites();
     setInterval(loopGame, 50);
@@ -27,13 +29,15 @@ function main() {
 
 // main game functionality
 function loopGame() {
+    if (paused)
+        return;
+
     let randomMeteoriteIndex = Math.floor(Math.random() * meteorites.length);
 
     context.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    if (meteorites[randomMeteoriteIndex].isFalling == false) {
+    if (meteorites[randomMeteoriteIndex].isFalling == false)
         meteorites[randomMeteoriteIndex].isFalling = true;
-    }
 
     for (arrayIndex = 0; arrayIndex < meteorites.length; arrayIndex++) {
         if (meteorites[arrayIndex].isFalling == true) {
@@ -61,6 +65,16 @@ function initializeMeteorites() {
 
 // key events
 document.addEventListener('keydown', (e) => {
+    if (e.key == " ") {
+        paused = !paused;
+        if (paused) {
+            context.fillStyle = "red";
+            context.font = "bold 36px sans-serif";
+            context.textAlign = "center";
+            context.fillText("Paused", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        }
+    }
+
     if (e.key == "ArrowLeft")
         player.moveLeft(CANVAS_WIDTH);
     else if (e.key == "ArrowRight")
